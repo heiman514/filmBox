@@ -23,11 +23,6 @@
 
 export default {
   name:'user',
-  data() {
-    return {
-      
-    }
-  },
   beforeMount() {
     if(this.$store.getters.getSession == null) {
       this.$router.push('/login')
