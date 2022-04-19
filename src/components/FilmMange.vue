@@ -105,6 +105,11 @@ export default {
             this.film = {}
         },
         onSubmit() {
+            if (this.film.title == ''){
+                alert('Please input film information first!')
+            } else {
+                console.log('Submited: '+ this.film.title);
+            }
             const body = {
                 s:this.$store.getters.getSession.s,
                 film:this.film

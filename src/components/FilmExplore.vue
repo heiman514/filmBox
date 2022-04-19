@@ -22,14 +22,18 @@
 
 <script>
 import axios from 'axios'
+import {ref} from 'vue'
+
+const films = ref(null)
+
 export default {
   name:'FilmExplore',
-  data() {
+  setup() {
     return {
-      films: null
+      films
     }
   },
-  mounted: function() {
+  mounted() {
     axios.get('list')
     .then((response) => {
       const randomArray = []
@@ -42,7 +46,7 @@ export default {
           randomFilms.push(response.data[randomIndex])
         }
       }
-      this.films = randomFilms
+      films.value = randomFilms
     })
   }
 }

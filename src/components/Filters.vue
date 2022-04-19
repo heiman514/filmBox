@@ -14,7 +14,8 @@
 </template>
 
 <script>
-const filters = [
+import {ref} from 'vue'
+const filters = ref([
     'All',
     'Action',
     'Adventure',
@@ -27,14 +28,15 @@ const filters = [
     'Fantasy',
     'Mystery',
     'Sci-Fi',
-]
+])
+
 export default {
     name:'Filters',
     props: [
       'filterFilms',
       'search',
     ],
-    data() {
+    setup() {
       return {
         filters
       }
