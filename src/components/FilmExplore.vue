@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-lg bg-blue-grey-1">
     <h5 class="text-blue-grey-9">Explore Movie and TV shows here</h5>
-      <div class="row justify-center">
+      <div class="row justify-center" style="margin-top:20px">
           <q-card
               v-ripple
               @click="$router.push(`/film/${film._id}`)" 

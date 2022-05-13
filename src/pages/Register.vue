@@ -117,8 +117,6 @@ export default {
 </script>
 
 <style scoped>
-.bottomLine {
-  border-bottom: 1px solid #ddd;
-}
+
 
 </style>

@@ -15,7 +15,7 @@
                 </q-card-section>
             </q-card>
         </div>
-        <div class="row q-gutter-lg justify-center" v-if="newfilms.length >= 0">
+        <div class="row q-gutter-lg justify-center" v-if="newfilms.length > 0">
             <q-card
                 v-ripple
                 @click="$router.push(`/film/${film._id}`)" 
@@ -25,21 +25,39 @@
             >
                 <q-img style="height:350px" :src="film.poster" :alt="film.title"/>
                 <q-card-section style="height: 100px">
-                    <div class="text-h7"><strong>{{ film.title }}</strong></div>
+                    <div class="text-hs7"><strong>{{ film.title }}</strong></div>
                     <div class="text-subtitle2">{{ film.year }}</div>
                 </q-card-section>
             </q-card>
-        </div>        
+        </div> 
+        <div class="q-pa-lg flex flex-center">
+            <q-pagination 
+                v-model="current"
+                :max="10"
+                :max-pages="5"
+                color="blue-grey-8"
+                direction-links
+                boundary-links
+                :ellipses="false"
+                :boundary-numbers="false"
+            />            
+        </div>       
     </div>
 </template>
 
 <script>
+import {ref} from 'vue'
 
 export default {
     name:'FilmItem',
     props:[
         'newfilms',
     ],
+    setup() {
+        return {
+            current: ref(1)
+        }
+    }
 }
 
 </script>

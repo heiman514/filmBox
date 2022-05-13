@@ -82,8 +82,8 @@ export default {
         store.commit('updateSession', response.data)
         localStorage.setItem('user', name.value)
         localStorage.setItem('pwd', password.value)
-        // localStorage.setItem('token', response.data.s)
-        // localStorage.setItem('role', response.data.role)
+        localStorage.setItem('token', response.data.s)
+        localStorage.setItem('role', response.data.role)
       })
       .then(()=> {
         name.value = null
@@ -120,13 +120,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 h4 {
   text-align: center;
-}
-.bottomLine {
-  margin-top: 50px;
-  border-bottom: 1px solid #ddd;
 }
 
 </style>

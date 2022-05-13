@@ -18,8 +18,8 @@
               </div>
               <div class="row items-center" v-if="getSession !== null">
                 <q-btn @click="logout" color="white" text-color="black" label="Logout" style="margin-right:10px"/>
-                <div style="font-size:18px">Hi, {{checkRole}}</div>
-                <q-avatar size="45px">
+                <div style="font-size:18px; margin-right:10px">Hi, {{$store.getters.getSession.role == 1 ? 'Staff' : 'Customer'}}</div>
+                <q-avatar size="38px">
                   <img src="https://cdn.quasar.dev/img/boy-avatar.png">
                 </q-avatar>      
               </div>
@@ -28,17 +28,28 @@
 
       <q-footer elevated>
         <div class="bg-blue-grey-10 q-pa-md row">
-          <div class="col-12 text-center">
+          <div class="col-12 text-center" style="margin-top:10px">
             <p class="footerName"><strong>Film</strong>Box</p>
             <q-avatar rounded><img src="./assets/filmBox.png"></q-avatar>
           </div>
+          <div class="col-12 text-center icons">
+            <img src="./assets/icons/icons8-facebook.svg"/>
+            <img src="./assets/icons/icons8-youtube.svg"/>
+            <img src="./assets/icons/icons8-instagram.svg"/>
+            <img src="./assets/icons/icons8-twitter.svg"/>           
+          </div>
           <p class="col-12 text-center">Copyright <q-icon name="copyright"/> FilmBox. Inc.</p>
+          
         </div>
       </q-footer>
 
       <q-page-container style="padding-top:20px">
         <router-view></router-view>
       </q-page-container>
+
+      <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
+          <q-btn fab icon="keyboard_arrow_up" color="blue-grey-8" />
+      </q-page-scroller>
 
       <q-drawer
         side="left"
@@ -48,7 +59,7 @@
         bordered
         class="bg-grey-3"
       >
-        <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd">
+        <q-scroll-area class="absolute-top" style="height: calc(100% - 150px); border-right: 1px solid #ddd">
           <q-list padding>
             <q-item clickable v-ripple to="/">
               <q-item-section avatar><q-icon name="home" /></q-item-section>
@@ -72,15 +83,6 @@
           </q-list>
         </q-scroll-area>
 
-        <q-img id="userInfo" class="absolute-top" src="https://wallpaperaccess.com/full/2650957.jpg" style="height: 150px">
-          <div class="absolute-bottom bg-transparent">
-            <q-avatar size="56px" class="q-mb-sm">
-              <img src="https://cdn.quasar.dev/img/boy-avatar.png">
-              </q-avatar>
-              <div class="text-weight-bold">Razvan Stoenescu</div>
-              <div>@rstoenescu</div>
-          </div>
-        </q-img>
       </q-drawer>
   </q-layout>  
 </template>
@@ -94,18 +96,12 @@ export default {
   setup() {
     return {
       drawerLeft: ref(false),
+      role:''
     }
   },
   computed: {
     ...mapGetters(['getSession']),
     
-    checkRole() {
-      if(this.$store.getters.getSession.role == 1) {
-        return 'Staff'
-      } else {
-        return 'Customer'
-      }
-    }
   },
   methods: {
     logout() {
@@ -138,6 +134,17 @@ a {
 
 #userInfo {
   display: block;
+}
+
+.bottomLine {
+  margin-top: 50px;
+  border-bottom: 1px solid #ddd;
+}
+
+.icons img {
+  height: 30px;
+  width: 30px;
+  margin: 10px 3px;
 }
 
 </style>

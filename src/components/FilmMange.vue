@@ -1,6 +1,6 @@
 <template>
     <div class="formHeader bg-blue-grey-1 text-blue-grey-9">
-        <h4>Add a Film</h4>
+        <h4 style="margin-left:30px">Add a Film</h4>
     </div>
     <div class="formBody">
         <div class="row">
@@ -13,7 +13,7 @@
             <div class="row input">
                 <div class="col-md-8 col-sm-12 col-xs-12">
                     <label>Title:</label>
-                    <q-input dense v-model="film.title" bg-color="blue-grey-1" standout="bg-blue-grey-8" class="inputTitle"/>
+                    <q-input disable dense v-model="film.title" bg-color="blue-grey-1" standout="bg-blue-grey-8" class="inputTitle"/>
                 </div>
                 <div class="col-md-2">
                     <label>Year:</label>
@@ -47,9 +47,14 @@
                     </div>
                 </div>
             </div>
-            <div class="btnSubmit">
-                <q-btn label="Submit" type="submit" color="blue-grey-8" @click="onSubmit"/>
-                <q-btn label="Reset" type="reset" color="blue-grey-9" flat class="q-ml-sm" @click="onReset()"/>
+            <div class="btnSubmit row justify-between">
+                <div>
+                    <q-btn label="Submit" type="submit" color="blue-grey-8" @click="onSubmit"/>
+                    <q-btn label="Reset" type="reset" color="blue-grey-9" flat class="q-ml-sm" @click="onReset()"/>
+                </div>
+                <div>
+                     <q-btn label="Cancel" color="blue-grey-9" class="q-ml-sm" to="/films"/>                   
+                </div>
             </div>
             </q-form>
         </div>
@@ -79,6 +84,8 @@ export default {
     beforeMount() {
         if(this.$store.getters.getSession == null) {
         this.$router.push('/login')
+        } else if (this.$store.getters.getSession.role !== 1){
+            alert('No right to assest!')
         }
     },     
     methods: {
@@ -108,27 +115,26 @@ export default {
             if (this.film.title == ''){
                 alert('Please input film information first!')
             } else {
-                console.log('Submited: '+ this.film.title);
+                const body = {
+                    s:this.$store.getters.getSession.s,
+                    film:this.film
+                }
+                axios.post('imfilm', body)
+                .then(res => {
+                    console.log(res)
+                    alert('Submited')
+                    this.film = {}
+                })
+                .catch(err => {
+                    console.log(err)
+                })
             }
-            const body = {
-                s:this.$store.getters.getSession.s,
-                film:this.film
-            }
-            axios.post('imfilm', body)
-            .then(res => {
-                console.log(res)
-                alert('Submited')
-                this.film = {}
-            })
-            .catch(err => {
-                console.log(err)
-            })
         }
     },
 }
 </script>
 
-<style>
+<style scoped>
 .formHeader {
     height: 80px;
     padding-top:20px;

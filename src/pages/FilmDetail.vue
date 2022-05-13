@@ -44,10 +44,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .poster {
-    width: 200px;
-    height: 300px;
+    width: 250px;
+    height: 350px;
 }
 .detailList {
     font-size: 18px;

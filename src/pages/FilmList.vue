@@ -5,12 +5,15 @@
         <q-breadcrumbs-el label="FILM LIST" icon="movie" to="/films"/>
     </q-breadcrumbs>
   </div>
-  <div>
-    <Filters :filterFilms="filterFilms" :search="search"/>
+  <div style="margin:0px auto">
+    <div>
+      <Filters :filterFilms="filterFilms" :search="search" :selectedGenre="selectedGenre"/>
+    </div>
+    <div>
+      <FilmItem :newfilms="newfilms" :searchResult="searchResult"/>
+    </div>
   </div>
-  <div>
-    <FilmItem :newfilms="newfilms" :searchResult="searchResult"/>
-  </div>
+
 </template>
 
 <script>
@@ -25,7 +28,8 @@ export default {
     },
     data() {
       return {
-        newfilms:[]
+        newfilms:[],
+        selectedGenre:'all'
       }
     },
     mounted() {
@@ -43,9 +47,11 @@ export default {
           this.newfilms = this.$store.getters.getFilms.filter((film) => {
             return film.genre.toLowerCase().includes(genreName.toLowerCase())
           })
+          this.selectedGenre = genreName.toLowerCase()
           console.log(this.newfilms)
         } else {
           this.newfilms = []
+          this.selectedGenre = 'all'
         }        
       },
       search (searchTitle) {
@@ -58,7 +64,5 @@ export default {
 </script>
 
 <style>
-.bottomLine {
-    border-bottom: 1px solid #ddd;
-}
+
 </style>

@@ -1,10 +1,10 @@
 <template>
     <div class="formHeader bg-blue-grey-1 text-blue-grey-9">
-        <h4>Profile</h4>
+        <h4 style="margin-left:20px">Profile</h4>
     </div>
     <div class="formBody">
         <div style="font-size:22px">
-            <p>Role: {{ getRole }}</p>
+            <p>Role: {{ $store.getters.getSession.role == 1 ? 'Staff' : 'Customer' }}</p>
             <p>User Name: {{ userName }}</p>
             <p>Password: {{ password }}</p>
             <div class="row items-center">
@@ -40,15 +40,6 @@ export default {
         this.$router.push('/login')
         }
     },
-    computed: {
-        getRole() {
-            if(this.$store.getters.getSession.role == 1) {
-                return 'Staff'
-            } else {
-                return 'Customer'
-            }
-        }
-    },
     methods:{
         updatePassword() {
             if(this.newpwd === this.firmpwd) {
@@ -72,7 +63,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .formHeader {
     height: 80px;
     padding-top:20px;
