@@ -29,18 +29,6 @@
                     <div class="text-subtitle2">{{ film.year }}</div>
                 </q-card-section>
             </q-card>
-        </div> 
-        <div class="q-pa-lg flex flex-center">
-            <q-pagination 
-                v-model="current"
-                :max="10"
-                :max-pages="5"
-                color="blue-grey-8"
-                direction-links
-                boundary-links
-                :ellipses="false"
-                :boundary-numbers="false"
-            />            
         </div>       
     </div>
 </template>

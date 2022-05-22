@@ -122,7 +122,7 @@ export default {
                 axios.post('imfilm', body)
                 .then(res => {
                     console.log(res)
-                    alert('Submited')
+                    alert('Add film succeed!')
                     this.film = {}
                 })
                 .catch(err => {
